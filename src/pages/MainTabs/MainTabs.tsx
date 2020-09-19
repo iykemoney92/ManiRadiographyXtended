@@ -1,0 +1,45 @@
+import React, { useReducer, useState }  from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
+import { Route, Redirect } from 'react-router';
+import { people, library, gameController, person } from 'ionicons/icons';
+import Social from '../Social/Social';
+
+interface MainTabsProps { }
+
+const MainTabs: React.FC<MainTabsProps> = () => {
+
+  return (
+    <IonTabs>
+      <IonRouterOutlet>
+       
+        {/*
+          Using the render method prop cuts down the number of renders your components will have due to route changes.
+          Use the component prop when your component depends on the RouterComponentProps passed in automatically.
+        */}
+        <Redirect exact path="/" to="/tabs/social" />
+        <Route path="/tabs/social" render={() => <Social />} exact={true} />
+      </IonRouterOutlet>
+      <IonTabBar slot="bottom">
+        <IonTabButton tab="social" href="/tabs/social">
+          <IonIcon icon={people} />
+          <IonLabel>Social</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="article" href="/tabs/article">
+          <IonIcon icon={library} />
+          <IonLabel>Articles</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="games" href="/tabs/games">
+          <IonIcon icon={gameController} />
+          <IonLabel>Games</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="profile" href="/tabs/profile">
+          <IonIcon icon={person} />
+          <IonLabel>Account</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
+    </IonTabs>
+  );
+};
+
+export default MainTabs;
