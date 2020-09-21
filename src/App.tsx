@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {
   IonApp,
   IonRouterOutlet,
@@ -8,7 +8,6 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import MainTabs from './pages/MainTabs/MainTabs';
 import Menu from './components/Menu/Menu';
-import Social from './pages/Social/Social';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -28,18 +27,19 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import MainPage from './pages/MainPage/MainPage';
-
+import {GlobalProvider} from './states/GlobalState';
 const App: React.FC = () => (
+  <GlobalProvider>
   <IonApp>
     <IonSplitPane contentId="main">
-    <Menu  />
+    <Menu   />
     <IonReactRouter>
         <IonRouterOutlet id="main">
           <Route path="/"  render={() => <MainTabs />} />
         </IonRouterOutlet>
     </IonReactRouter>
     </IonSplitPane>
-  </IonApp>
+  </IonApp></GlobalProvider>
 );
 
 export default App;
