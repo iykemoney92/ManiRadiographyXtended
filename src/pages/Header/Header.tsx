@@ -1,16 +1,27 @@
-import React from 'react';
-import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar} from '@ionic/react';
+import React, {useContext} from 'react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonTitle, IonToolbar} from '@ionic/react';
+import { GlobalContext } from '../../states/GlobalState';
 
-const Header: React.FC<any> = ({title}) => {
+const Header: React.FC<any> = () => {
+  const {title} = useContext(GlobalContext);
   return (
-      <IonHeader>
-        <IonToolbar>
+    <>
+    <IonHeader >
+        <IonToolbar color="primary">
           <IonButtons slot="start">
              <IonMenuButton />
           </IonButtons>
           <IonTitle>{title}</IonTitle>
-        </IonToolbar>
+        </IonToolbar> 
       </IonHeader>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{title}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+      </IonContent>
+      </>
   );
 };
 

@@ -4,6 +4,10 @@ import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } 
 import { Route, Redirect } from 'react-router';
 import { people, library, gameController, person } from 'ionicons/icons';
 import Social from '../Social/Social';
+import { Account } from '../Account/Account';
+import { Games } from '../Games/Games';
+import { Articles } from '../Articles/Articles';
+import { IonReactRouter } from '@ionic/react-router';
 
 interface MainTabsProps { }
 
@@ -19,21 +23,24 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         */}
         <Redirect exact path="/" to="/tabs/social" />
         <Route path="/tabs/social" render={() => <Social />} exact={true} />
+        <Route path="/tabs/articles" render={() => <Articles />} exact={true} />
+        <Route path="/tabs/games" render={() => <Games />} exact={true} />
+        <Route path="/tabs/account" render={() => <Account />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="social" href="/tabs/social">
           <IonIcon icon={people} />
           <IonLabel>Social</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="article" href="/tabs/article">
+        <IonTabButton tab="articles" href="/tabs/articles">
           <IonIcon icon={library} />
-          <IonLabel>Articles</IonLabel>
+          <IonLabel>Learn</IonLabel>
         </IonTabButton>
         <IonTabButton tab="games" href="/tabs/games">
           <IonIcon icon={gameController} />
           <IonLabel>Games</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="profile" href="/tabs/profile">
+        <IonTabButton tab="account" href="/tabs/account">
           <IonIcon icon={person} />
           <IonLabel>Account</IonLabel>
         </IonTabButton>

@@ -1,5 +1,7 @@
 {
   "name": "Mani Radiography Xtended",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

@@ -2,12 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import {
   IonApp,
-  IonRouterOutlet,
   IonSplitPane
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import MainTabs from './pages/MainTabs/MainTabs';
-import Menu from './components/Menu/Menu';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -26,20 +22,15 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import MainPage from './pages/MainPage/MainPage';
 import {GlobalProvider} from './states/GlobalState';
+import MainPage from './pages/MainPage/MainPage';
+import Menu from './components/Menu/Menu';
 const App: React.FC = () => (
   <GlobalProvider>
-  <IonApp>
-    <IonSplitPane contentId="main">
-    <Menu   />
-    <IonReactRouter>
-        <IonRouterOutlet id="main">
-          <Route path="/"  render={() => <MainTabs />} />
-        </IonRouterOutlet>
-    </IonReactRouter>
-    </IonSplitPane>
-  </IonApp></GlobalProvider>
+    <IonApp>
+      <MainPage />
+    </IonApp>
+  </GlobalProvider>
 );
 
 export default App;

@@ -1,5 +1,9 @@
 import {
+  IonButtons,
+  IonCol,
     IonContent,
+    IonGrid,
+  IonHeader,
     IonIcon,
     IonImg,
     IonItem,
@@ -7,8 +11,12 @@ import {
     IonList,
     IonListHeader,
     IonMenu,
+    IonMenuButton,
     IonMenuToggle,
     IonNote,
+    IonRow,
+    IonTitle,
+    IonToolbar,
   } from '@ionic/react';
   
   import React from 'react';
@@ -17,59 +25,40 @@ import {
     gameControllerSharp, personOutline, personSharp, bookmarkOutline} from 'ionicons/icons';
   import './Menu.css';
   
-  interface AppPage {
+  interface MenuItems {
     url: string;
     iosIcon: string;
     mdIcon: string;
     title: string;
   }
   
-  const appPages: AppPage[] = [
-    {
-      title: 'Social',
-      url: '/page/Social',
-      iosIcon: peopleOutline,
-      mdIcon: peopleSharp
-    },
-    {
-      title: 'Information',
-      url: '/page/Information',
-      iosIcon: libraryOutline,
-      mdIcon: librarySharp
-    },
-    {
-      title: 'Games',
-      url: '/page/Games',
-      iosIcon: gameControllerOutline,
-      mdIcon: gameControllerSharp
-    },
-    {
-      title: 'Profile',
-      url: '/page/Profile',
-      iosIcon: personOutline,
-      mdIcon: personSharp
-    }
+  const menuItems: MenuItems[] = [
+    
   ];
    
 
   
   const Menu: React.FC = () => {
     return (
-      <IonMenu contentId="main" type="overlay">
+      <IonMenu contentId="main"  type="overlay">
         <IonContent>
-          <IonImg src="https://lh3.googleusercontent.com/b2NojjdSBfqPD6vD8MEvzoGC_gPhrwoh94bEvEGf-V233iycweQiFG_2hYkK0cHSJws"/>
+          <IonImg src="https://firebasestorage.googleapis.com/v0/b/mani-radiogrpahy-xtended.appspot.com/o/assets%2Fmenu_banner.png?alt=media&token=78eb585a-07f5-4a93-947f-e5df80cbd264"/>
           <IonList id="inbox-list">
             <IonListHeader>
-              <IonLabel>Mani Radiography Xtended</IonLabel>
-              <IonNote>Browse radiological informations, connect with radiography enthusiasts, students and professionals. Play radiological games. Mix!!!</IonNote>
-              </IonListHeader>
+              <IonGrid>
+                <IonRow><IonCol>
+                <IonLabel>Mani Radiography Xtended</IonLabel></IonCol></IonRow>
+                <IonRow><IonCol>
+                  <IonNote>Browse radiological informations, connect with radiography enthusiasts, students and professionals. Play radiological games. Mix!!!</IonNote>
+              </IonCol></IonRow>
+              </IonGrid></IonListHeader>
             
-            {appPages.map((appPage, index) => {
+            {menuItems.map((menuItem, index) => {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
-                  <IonItem  routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                    <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                    <IonLabel>{appPage.title}</IonLabel>
+                  <IonItem  routerLink={menuItem.url} routerDirection="none" lines="none" detail={false}>
+                    <IonIcon slot="start" ios={menuItem.iosIcon} md={menuItem.mdIcon} />
+                    <IonLabel>{menuItem.title}</IonLabel>
                   </IonItem>
                 </IonMenuToggle>
               );

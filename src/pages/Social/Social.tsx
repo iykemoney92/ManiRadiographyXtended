@@ -1,23 +1,32 @@
-import React,{useEffect, useState} from 'react';
-import { IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import Header from '../Header/Header';
+import React,{Component, useContext, useEffect, useState} from 'react';
+import { IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonMenuButton, IonModal, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, useIonViewWillEnter, withIonLifeCycle } from '@ionic/react';
 import { attach, camera, chatbubbles, documentText, locate} from 'ionicons/icons';
 import useFireStore from '../../hooks/useFireStore';
 import { SocialCard } from '../../components/SocialCard/SocialCard';
+import { GlobalContext } from '../../states/GlobalState';
+import { ShareTextModal } from '../../modals/ShareTextModal/ShareTextModal';
+
 
 
 const Social: React.FC = () => {
   const { posts } = useFireStore('posts');
-
-  console.log(posts);
+  const { setTitle } = useContext(GlobalContext);
+  const [showShareTextModal, setShareText] = useState(false);
+  const [showShareImageModal, setShareImage] = useState(false);
+  const [showShareFileModal, setShareFile] = useState(false);
+  const [showShareEventModal, setShareEvent] = useState(false);
+  
+  useEffect(()=>{
+    setTitle('Social');
+  })
+  
   return (
-    <>
-    <IonPage>
-    <Header title="Social" />
-    <IonContent>
+    <IonContent >
         {
-        posts && posts.map(({id, created_at,title,body})  => (
-              <SocialCard id = {id} created_at={created_at} body={body} />
+        posts && posts.map(({id, created_at,type,meta,title,likes,shares,comments,user})  => (
+              <SocialCard key={id} created_at={created_at} meta={meta} 
+              type={type} title={title} likes={likes} shares={shares} 
+              comments={comments} user={user}/>
           ))
         }
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
@@ -25,16 +34,22 @@ const Social: React.FC = () => {
             <IonIcon icon={chatbubbles} />
           </IonFabButton>
           <IonFabList side="top">
-            <IonFabButton><IonIcon icon={documentText} /></IonFabButton>
-            <IonFabButton><IonIcon icon={camera} /></IonFabButton>
-            <IonFabButton><IonIcon icon={attach} /></IonFabButton>
-            <IonFabButton><IonIcon icon={locate} /></IonFabButton>
+            <IonFabButton onClick={()=>{setShareText(true)}}><IonIcon icon={documentText} /></IonFabButton>
+            <IonFabButton onClick={()=>{setShareImage(true)}}><IonIcon icon={camera} /></IonFabButton>
+            <IonFabButton onClick={()=>{setShareFile(true)}}><IonIcon icon={attach} /></IonFabButton>
+            <IonFabButton onClick={()=>{setShareEvent(true)}}><IonIcon icon={locate} /></IonFabButton>
           </IonFabList>
-          
         </IonFab>
+
+        <>
+          <IonModal
+          isOpen={showShareTextModal}
+          swipeToClose={true}
+          onDidDismiss={() => setShareText(true)}>
+            <ShareTextModal />
+          </IonModal>
+        </>
     </IonContent>
-    </IonPage>
-    </>
   );
 };
 

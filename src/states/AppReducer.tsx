@@ -1,6 +1,11 @@
 export default (state: any, action: any) => {
   switch(action.type){
-      default:
+    case 'SET_TITLE':
+      return {
+        ...state,
+        title: action.payload
+      } ;
+    default:
           return state;
   }
 }
