@@ -12,7 +12,7 @@ const MainPage: React.FC<any> = ({title}) => {
     <IonSplitPane contentId="main">
       <Menu />
       <IonPage id="main">
-      <Header />
+       <Header />
       <MainTabs /></IonPage>
       </IonSplitPane>
     </IonReactRouter>

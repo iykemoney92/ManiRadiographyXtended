@@ -8,6 +8,7 @@ import { Account } from '../Account/Account';
 import { Games } from '../Games/Games';
 import { Articles } from '../Articles/Articles';
 import { IonReactRouter } from '@ionic/react-router';
+import Header from '../Header/Header';
 
 interface MainTabsProps { }
 
