@@ -15,14 +15,14 @@ export const SocialCard : React.FC<any> = ({id, title, type, created_at, meta,li
             return (
               <IonCard>
                 <TextCard created_at={date.toLocaleString()} body={meta.body} title={title} user={user}/>
-                <SocialCardFooter likes={likes} shares={shares} comments={comments} />
+                <SocialCardFooter likes={likes} shares={shares} comments={comments} id={id} />
               </IonCard>
             )
           break;
             case 'image':return (
               <IonCard>
                 <ImageCard created_at={date.toLocaleString()} body={meta.body} url={meta.url} title={title} user={user}/>
-                <SocialCardFooter likes={likes} shares={shares} comments={comments} />
+                <SocialCardFooter likes={likes} shares={shares} comments={comments} id={id}/>
               </IonCard>
             )
               break;

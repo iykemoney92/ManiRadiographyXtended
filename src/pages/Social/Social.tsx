@@ -28,7 +28,7 @@ const Social: React.FC = () => {
     <IonContent color="light">
         {
         posts && posts.map(({id, created_at,type,meta,title,likes,shares,comments,user})  => (
-              <SocialCard key={id} created_at={created_at} meta={meta} 
+              <SocialCard key={id} id={id} created_at={created_at} meta={meta} 
               type={type} title={title} likes={likes} shares={shares} 
               comments={comments} user={user}/>
           ))

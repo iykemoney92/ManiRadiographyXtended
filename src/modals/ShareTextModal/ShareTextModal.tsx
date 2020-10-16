@@ -1,4 +1,4 @@
-import { IonChip, IonAvatar, IonLabel, IonTextarea, IonButton, IonItem, IonLoading, IonToast } from '@ionic/react';
+import { IonChip, IonAvatar, IonLabel, IonTextarea, IonButton, IonItem, IonLoading, IonToast, IonProgressBar } from '@ionic/react';
 import React, { useContext, useState } from 'react'
 import { GlobalContext } from '../../states/GlobalState';
 import {projectFireStore, firebase} from '../../firebase.config';
@@ -54,7 +54,7 @@ export const ShareTextModal:React.FC = () => {
                 isOpen={showLoading}
                 message={'Please wait...'}
                 duration={0}
-      /> <IonToast
+      />  <IonToast
       isOpen={showToast}
       message={message}
       onDidDismiss={() => setShowToast(false)}
