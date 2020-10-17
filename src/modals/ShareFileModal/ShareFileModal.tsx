@@ -2,15 +2,15 @@ import { IonChip, IonAvatar, IonLabel, IonTextarea, IonButton, IonItem, IonLoadi
 import React, { useContext, useRef, useState } from 'react'
 import { GlobalContext } from '../../states/GlobalState';
 import {projectFireStore, firebase} from '../../firebase.config';
-import { imageOutline } from 'ionicons/icons';
+import { documentOutline, imageOutline } from 'ionicons/icons';
 
-export const ShareImageModal:React.FC = () => {
-    const { user,setModalState1 } = useContext(GlobalContext);
+export const ShareFileModal:React.FC = () => {
+    const { user,setModalState2 } = useContext(GlobalContext);
     const [ postData, setPostData ] = useState('');
     const [showLoading, setShowLoading] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [message, setMessage] = useState('');
-    const [image_url, setImageUrl] = useState('');
+    const [file_url, setFileUrl] = useState('');
     const [isHidden, setIsHidden] = useState(true);
     const [hasError, setError] = useState(false);
     const fileInput = useRef(null);
@@ -22,18 +22,18 @@ export const ShareImageModal:React.FC = () => {
     let fileParts = f.name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    if(['jpeg','jpg','gif','png'].indexOf(fileType)!=-1){
+    if(['pdf','doc','ppt','pps','xls','zip'].indexOf(fileType)!=-1){
         var reader = new FileReader();
         reader.onload = function (e: any) {
            setIsHidden(false);
            setError(false);
-           setImageUrl(e.target.result);
+           setFileUrl(e.target.result);
         }
         reader.readAsDataURL(f); 
     }else{
         setIsHidden(true);
         setError(true);
-        setMessage('File type not supported. Only jpeg, jpg, png, gif allowed');
+        setMessage('File type not supported. Only pdf, doc, ppt, pps, xls, zip allowed');
         setShowToast(true);
     }
     }
@@ -46,8 +46,32 @@ export const ShareImageModal:React.FC = () => {
             setShowLoading(true);
             //upload to storage
             // Create the file metadata
+                    
+            let fileParts = file.name.split('.');
+            let fileType = fileParts[1];
+            let contentType = '';
+            switch(fileType){
+                case 'doc':
+                    contentType = 'application/msword';
+                    break;
+                case 'pdf':
+                    contentType = 'application/pdf';
+                    break;
+                    case 'ppt':
+                        contentType = 'application/vnd.ms-powerpoint'
+                        break;
+                        case 'pps':
+                            contentType = 'application/vnd.ms-powerpoint';
+                            break;
+                            case 'xls':
+                                contentType = 'application/vnd.ms-excel';
+                                break;
+                                case 'zip':
+                                    contentType = 'application/zip';
+                                    break;
+            }
             var metadata = {
-                contentType: 'image/jpeg'
+                contentType: contentType
             };
   
             // Upload file and metadata to the object 'images/mountains.jpg'
@@ -97,9 +121,9 @@ export const ShareImageModal:React.FC = () => {
                       body: postData,
                       url: downloadURL
                     },
-                    type: 'image',
+                    type: 'file',
                     shares: [],
-                    title: ' shared a photo',
+                    title: ' shared a document',
                     user: user};
                   console.log(fileInput);
                   const res = projectFireStore.collection('posts').add(data).then(()=>{
@@ -136,7 +160,7 @@ export const ShareImageModal:React.FC = () => {
                     ref={fileInput}
                     hidden
                     type="file"
-                    accept="image/*"
+                    accept=".doc,.ppt,.pps,.xls,.pdf,.zip"
                     onChangeCapture={handleFileChange}
                 />
                         <IonButton
@@ -146,19 +170,21 @@ export const ShareImageModal:React.FC = () => {
                 fileInput?.current?.click();
                 // setBackgroundOption(BackgroundOptionType.Gradient);
                 }} expand="block">
-                <IonIcon slot="start" icon={imageOutline} />
-                Select photo you wish to share
+                <IonIcon slot="start" icon={documentOutline} />
+                Select document you wish to share.
             </IonButton>
-              </IonItem>
-                <IonImg src={image_url}  hidden={isHidden}/>
-            
+              </IonItem >
+              <IonItem hidden={isHidden}>
+                <IonIcon   style={{zoom:5}} icon={documentOutline}/>
+                Document selected
+                </IonItem>
               <IonItem>
               <IonTextarea  autofocus={true} placeholder="Type here" value={postData} 
               required={true} onIonChange={e => setPostData(e.detail.value!)} rows={10}></IonTextarea>
               </IonItem>
               <IonItem>
               <IonButton  onClick={post}>Post</IonButton>
-              <IonButton  onClick={() => {setModalState1(false)}} color="light">Cancel</IonButton></IonItem>
+              <IonButton  onClick={() => {setModalState2(false)}} color="light">Cancel</IonButton></IonItem>
               <IonLoading
                   isOpen={showLoading}
                   message={'Please wait...'}

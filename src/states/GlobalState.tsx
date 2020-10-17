@@ -11,7 +11,9 @@ const AppData : any = {
     },
     isLoading: false,
     modalState: false,
-    modalState1: false
+    modalState1: false,
+    modalState2: false,
+    modalState3: false
 };
 
 export const GlobalContext = createContext(AppData);
@@ -41,9 +43,39 @@ export const GlobalProvider = (params:any) => {
          payload: _modalState
      });
  }
+ function setModalState2(_modalState : any)
+ {
+    return dispatch({
+         type: 'CLOSE_MODAL_2',
+         payload: _modalState
+     });
+ }
+ 
+ function setModalState3(_modalState : any)
+ {
+    return dispatch({
+         type: 'CLOSE_MODAL_3',
+         payload: _modalState
+     });
+ }
+ function setUser(_user : any)
+ {
+    return dispatch({
+         type: 'SET_USER',
+         payload: _user
+     });
+ }
+ function setIsLoggedIn(_isLoggedIn : any)
+ {
+    return dispatch({
+         type: 'SET_LOGGED_IN',
+         payload: _isLoggedIn
+     });
+ }
  return (<GlobalContext.Provider value={{
    ...state, title: state.title, setTitle, modalState: state.modalState, setModalState, modalState1: state.modalState1,
-   setModalState1
+   setModalState1, modalState2: state.modalState2, setModalState2,modalState3:state.modalState3,setModalState3, isLoggedIn: state.isLoggedIn,
+   setIsLoggedIn, setUser
  }}>
      {params.children}
  </GlobalContext.Provider>);

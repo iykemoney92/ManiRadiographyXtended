@@ -22,7 +22,7 @@ export const ShareTextModal:React.FC = () => {
       },
       type: 'text',
       shares: [],
-      title: user.name + ' posted',
+      title: ' shared a post',
       user: user};
     
     const res = projectFireStore.collection('posts').add(data).then(()=>{
@@ -58,7 +58,7 @@ export const ShareTextModal:React.FC = () => {
       isOpen={showToast}
       message={message}
       onDidDismiss={() => setShowToast(false)}
-      duration={200}
+      duration={2000}
       color="danger"
     />
         </div>

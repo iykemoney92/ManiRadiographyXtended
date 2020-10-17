@@ -14,6 +14,25 @@ export default (state: any, action: any) => {
           return {
             ...state,
             modalState1: action.payload
+          };
+          case 'CLOSE_MODAL_2':
+          return {
+            ...state,
+            modalState2: action.payload
+          };
+          case 'CLOSE_MODAL_3':
+          return {
+            ...state,
+            modalState3: action.payload
+          };
+          case 'SET_USER':
+          return {
+            ...state,
+            user: action.payload
+          }; case 'SET_LOGGED_IN':
+          return {
+            ...state,
+            isLoggedIn: action.payload
           }
     default:
           return state;
