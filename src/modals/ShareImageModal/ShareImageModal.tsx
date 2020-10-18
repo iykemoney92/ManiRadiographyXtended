@@ -20,7 +20,6 @@ export const ShareImageModal:React.FC = () => {
     setFile(f);
     // Split the filename to get the name and type
     let fileParts = f.name.split('.');
-    let fileName = fileParts[0];
     let fileType = fileParts[1];
     if(['jpeg','jpg','gif','png'].indexOf(fileType)!=-1){
         var reader = new FileReader();
@@ -46,8 +45,10 @@ export const ShareImageModal:React.FC = () => {
             setShowLoading(true);
             //upload to storage
             // Create the file metadata
+            let fileParts = file.name.split('.');
+            let fileType = fileParts[1];
             var metadata = {
-                contentType: 'image/jpeg'
+                contentType: 'image/'+fileType
             };
   
             // Upload file and metadata to the object 'images/mountains.jpg'

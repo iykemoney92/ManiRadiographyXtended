@@ -21,3 +21,6 @@
 [1016/140249.000:ERROR:exception_snapshot_win.cc(100)] thread ID 10196 not found in process
 [1016/151828.179:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1017/091413.900:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1017/195955.170:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1017/195955.253:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\iyke\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\4175769d-c573-4e3c-8b42-80d218c5a835: The system cannot find the path specified. (0x3)
+[1018/131124.165:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

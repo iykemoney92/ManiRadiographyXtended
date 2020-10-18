@@ -33,7 +33,22 @@ export default (state: any, action: any) => {
           return {
             ...state,
             isLoggedIn: action.payload
-          }
+          };
+          case 'SIGNIN_MODAL_STATE':
+            return {
+              ...state,
+              signInModalState: action.payload
+            };
+            case 'SIGNUP_MODAL_STATE':
+            return {
+              ...state,
+              signUpModalState: action.payload
+            };
+            case 'UPDATE_PROFILE_MODAL_STATE':
+            return {
+              ...state,
+              updateProfileModalState: action.payload
+            }
     default:
           return state;
   }

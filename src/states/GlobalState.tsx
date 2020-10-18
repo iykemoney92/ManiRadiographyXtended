@@ -4,16 +4,15 @@ import AppReducer from './AppReducer';
 const AppData : any = {
     title : null, //title of each page navigated
     isLoggedIn : false,
-    user : {
-        name: 'Anasiudu Ikechukwu',
-        photo_url: 'https://firebasestorage.googleapis.com/v0/b/mani-radiogrpahy-xtended.appspot.com/o/avatars%2F0.jpg?alt=media&token=e9764e9e-4a7d-40bc-b603-a9205fa1286e',
-        email: 'skybender21@gmail.com'
-    },
+    user : null,
     isLoading: false,
     modalState: false,
     modalState1: false,
     modalState2: false,
-    modalState3: false
+    modalState3: false,
+    signInModalState: false,
+    signUpModalState: false,
+    updateProfileModalState: false
 };
 
 export const GlobalContext = createContext(AppData);
@@ -72,10 +71,32 @@ export const GlobalProvider = (params:any) => {
          payload: _isLoggedIn
      });
  }
+ function setSignInModalState(_modalState : any)
+ {
+    return dispatch({
+         type: 'SIGNIN_MODAL_STATE',
+         payload: _modalState
+     });
+ }
+ function setSignUpModalState(_modalState : any)
+ {
+    return dispatch({
+         type: 'SIGNUP_MODAL_STATE',
+         payload: _modalState
+     });
+ }
+ function setupdateProfileModalState(_modalState : any)
+ {
+    return dispatch({
+         type: 'UPDATE_PROFILE_MODAL_STATE',
+         payload: _modalState
+     });
+ }
  return (<GlobalContext.Provider value={{
    ...state, title: state.title, setTitle, modalState: state.modalState, setModalState, modalState1: state.modalState1,
    setModalState1, modalState2: state.modalState2, setModalState2,modalState3:state.modalState3,setModalState3, isLoggedIn: state.isLoggedIn,
-   setIsLoggedIn, setUser
+   setIsLoggedIn, setUser, user: state.user, signUpModalState: state.signUpModalState, setSignUpModalState, signInModalState: state.signInModalState,
+   setSignInModalState,updateProfileModalState: state.updateProfileModalState,setupdateProfileModalState
  }}>
      {params.children}
  </GlobalContext.Provider>);
