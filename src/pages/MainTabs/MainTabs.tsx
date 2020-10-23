@@ -1,5 +1,4 @@
-import React, { useReducer, useState }  from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React  from 'react';
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
 import { people, library, gameController, person } from 'ionicons/icons';
@@ -7,8 +6,6 @@ import Social from '../Social/Social';
 import { Account } from '../Account/Account';
 import { Games } from '../Games/Games';
 import { Articles } from '../Articles/Articles';
-import { IonReactRouter } from '@ionic/react-router';
-import Header from '../Header/Header';
 
 interface MainTabsProps { }
 

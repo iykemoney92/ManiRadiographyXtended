@@ -2,7 +2,7 @@ import React, { useState, createContext, useReducer} from 'react';
 import AppReducer from './AppReducer';
 
 const AppData : any = {
-    title : null, //title of each page navigated
+    title : "Mani Radiography Xtended", //title of each page navigated
     isLoggedIn : false,
     user : null,
     isLoading: false,

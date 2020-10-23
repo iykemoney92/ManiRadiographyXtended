@@ -10,7 +10,7 @@ const useFireStore = (collection : any) => {
           const unsub = projectFireStore.collection(collection).orderBy('created_at','desc').onSnapshot((snap)=>{
             let documents : any = [];
             snap.forEach( doc => {
-                //console.log(doc.id);
+                console.log(doc.id);
                 documents.push({...doc.data(),id: doc.id});
             })
             setPosts(documents);
